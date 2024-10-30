@@ -1,6 +1,7 @@
 package lol.stompy.tp.profile;
 
 import lol.stompy.tp.TP;
+import lol.stompy.tp.request.TPRequest;
 import lol.stompy.tp.util.cooldown.SimpleCooldown;
 import lol.stompy.tp.util.sFile;
 import lol.stompy.tp.util.sLocation;
@@ -19,6 +20,8 @@ public class Profile {
 
     private final HashMap<String, Location> warps;
     private final SimpleCooldown tpCooldown;;
+
+    private final List<TPRequest> tpRequests = new ArrayList<>();
 
     /**
      * Creates a profile for a uuid
@@ -106,6 +109,63 @@ public class Profile {
 
     public final void createTp(String name, Location tp) {
         warps.put(name, tp);
+    }
+
+    /**
+     * Deletes a TP of the player
+     *
+     * @param name name of tp to delete
+     */
+
+    public final void deleteTp(String name) {
+        warps.remove(name);
+    }
+
+    /**
+     * Sends a TP request
+     *
+     * @param tpName name of TP
+     * @param receiver receiver of request
+     */
+
+    public final void sendRequest(String tpName, Profile receiver) {
+        tpRequests.add(new TPRequest(tpName, this, receiver));
+        receiver.addRequest(tpName, this);
+    }
+
+    /**
+     * Adds a TP request
+     *
+     * @param tpName name of TP
+     * @param sender sender of TP
+     */
+
+    public final void addRequest(String tpName, Profile sender) {
+        tpRequests.add(new TPRequest(tpName, sender, this));
+    }
+
+    /**
+     * Removes a request
+     *
+     * @param tpName request to remove
+     */
+
+    public final void removeRequest(String tpName) {
+        tpRequests.forEach(tpRequest ->  {
+            if (tpRequest.getTpName().equalsIgnoreCase(tpName))
+                tpRequests.remove(tpRequest);
+        });
+    }
+
+    /**
+     * Finds a TP request from a profile
+     *
+     * @param profile profile to find TP request from
+     * @return {@link Optional<TPRequest>}
+     */
+
+    public final Optional<TPRequest> findRequest(Profile profile) {
+        return tpRequests.stream().filter(tpRequest -> tpRequest.getSender().getUuid().equals(profile.getUuid())).findFirst();
     }
 
     /**

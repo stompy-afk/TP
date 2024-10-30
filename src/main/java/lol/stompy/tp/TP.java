@@ -32,7 +32,6 @@ public class TP extends JavaPlugin {
     @Override
     public void onEnable() {
         this.profiles = new sFile(getDataFolder(), "profiles.yml");
-
         this.profileHandler = new ProfileHandler(this);
     }
 

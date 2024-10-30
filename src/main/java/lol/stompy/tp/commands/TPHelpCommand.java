@@ -72,5 +72,25 @@ public class TPHelpCommand {
         sender.sendMessage(CC.translate("&fCreated &aTP &fwith the name &a" + name + "&f!"));
     }
 
+    @Command("tp delete")
+    public void delete(@Sender Player sender, @Name("tp") String tp) {
+        final Optional<Profile> optionalProfile = this.tp.getProfileHandler().getProfile(sender.getUniqueId());
+
+        if (optionalProfile.isEmpty()) {
+            sender.sendMessage(CC.translate("&cYou don't have a profile, please contact the admin!"));
+            return;
+        }
+
+        final Profile profile = optionalProfile.get();
+
+        if (profile.getWarp(tp).isEmpty()) {
+            sender.sendMessage(CC.translate("&cYou don't have a warp with this name!"));
+            return;
+        }
+
+        profile.deleteTp(tp);
+        sender.sendMessage(CC.translate("&fDeleted TP &a" + tp + " &fsuccessfully"));
+    }
+
 
 }
