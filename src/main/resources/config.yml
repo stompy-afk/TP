@@ -1,0 +1,4 @@
+settings:
+  maximum-tps: 3
+  cooldown: 60
+  can-invite-others: true
