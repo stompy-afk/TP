@@ -1,6 +1,5 @@
 package lol.stompy.tp.profile;
 
-import lol.stompy.tp.TP;
 import lol.stompy.tp.request.TPRequest;
 import lol.stompy.tp.util.cooldown.SimpleCooldown;
 import lol.stompy.tp.util.sFile;
@@ -19,14 +18,15 @@ public class Profile {
     private final UUID uuid;
 
     private final HashMap<String, Location> warps;
-    private final SimpleCooldown tpCooldown;;
+    private final SimpleCooldown tpCooldown;
+    ;
 
     private final List<TPRequest> tpRequests = new ArrayList<>();
 
     /**
      * Creates a profile for a uuid
      *
-     * @param uuid uuid to create profile for
+     * @param uuid       uuid to create profile for
      * @param tpCooldown time for the tp cooldown
      */
 
@@ -41,7 +41,7 @@ public class Profile {
      * Creates a profile from configuration
      *
      * @param configurationSection section to create profile from
-     * @param tpCooldown time for the tp cooldown
+     * @param tpCooldown           time for the tp cooldown
      */
 
     public Profile(ConfigurationSection configurationSection, int tpCooldown) {
@@ -104,7 +104,7 @@ public class Profile {
      * creates a tp for a location
      *
      * @param name name of tp
-     * @param tp location
+     * @param tp   location
      */
 
     public final void createTp(String name, Location tp) {
@@ -124,7 +124,7 @@ public class Profile {
     /**
      * Sends a TP request
      *
-     * @param tpName name of TP
+     * @param tpName   name of TP
      * @param receiver receiver of request
      */
 
@@ -151,7 +151,7 @@ public class Profile {
      */
 
     public final void removeRequest(String tpName) {
-        tpRequests.forEach(tpRequest ->  {
+        tpRequests.forEach(tpRequest -> {
             if (tpRequest.getTpName().equalsIgnoreCase(tpName))
                 tpRequests.remove(tpRequest);
         });

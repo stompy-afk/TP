@@ -57,7 +57,7 @@ public class ProfileHandler {
      * Handles the removal of a profile
      *
      * @param profile profile to handle removal off
-     * @param async to do task async or not
+     * @param async   to do task async or not
      */
 
     public final void handleRemoval(Profile profile, boolean async) {
@@ -69,7 +69,7 @@ public class ProfileHandler {
      * saves a profile to the configuration file
      *
      * @param profile profile to save
-     * @param async to do task async or not
+     * @param async   to do task async or not
      */
 
     private void save(Profile profile, boolean async) {
@@ -96,7 +96,7 @@ public class ProfileHandler {
     /**
      * Gets all profiles
      *
-      * @return {@link Collection<Profile>}
+     * @return {@link Collection<Profile>}
      */
 
     public final Collection<Profile> getProfiles() {

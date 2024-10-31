@@ -6,7 +6,6 @@ import lol.stompy.tp.util.CC;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.Server;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
@@ -26,7 +25,7 @@ public class TPRequest {
     /**
      * TP Request to send TP
      *
-     * @param sender sender of TP request
+     * @param sender   sender of TP request
      * @param receiver receiver of TP request
      */
 

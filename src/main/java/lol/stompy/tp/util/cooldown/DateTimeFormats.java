@@ -3,7 +3,6 @@ package lol.stompy.tp.util.cooldown;
 
 import org.apache.commons.lang3.time.FastDateFormat;
 
-import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.time.ZoneId;
 import java.util.Locale;

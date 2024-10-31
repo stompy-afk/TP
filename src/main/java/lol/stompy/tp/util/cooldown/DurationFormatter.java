@@ -1,6 +1,5 @@
 package lol.stompy.tp.util.cooldown;
 
-import lol.stompy.tp.util.cooldown.DateTimeFormats;
 import org.apache.commons.lang3.time.DurationFormatUtils;
 
 import java.util.concurrent.TimeUnit;
