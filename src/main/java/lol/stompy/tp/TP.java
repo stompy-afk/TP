@@ -2,6 +2,7 @@ package lol.stompy.tp;
 
 import lol.stompy.tp.commands.TPCommand;
 import lol.stompy.tp.profile.ProfileHandler;
+import lol.stompy.tp.util.CC;
 import lol.stompy.tp.util.sFile;
 import lombok.Getter;
 import me.vaperion.blade.Blade;
@@ -34,17 +35,17 @@ public class TP extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        this.getServer().getConsoleSender().sendMessage("&7[&aTP&7] &fLoading profiles...");
+        this.getServer().getConsoleSender().sendMessage(CC.translate("&7[&aTP&7] &fLoading profiles..."));
 
         this.profiles = new sFile(getDataFolder(), "profiles.yml");
         this.profileHandler = new ProfileHandler(this);
 
-        this.getServer().getConsoleSender().sendMessage("&7[&aTP&7] &fProfiles Loaded", "\n",
-                "&7[&aTP&7] &fLoading commands...");
+        this.getServer().getConsoleSender().sendMessage(CC.translate("&7[&aTP&7] &fProfiles Loaded"), "\n",
+                CC.translate("&7[&aTP&7] &fLoading commands..."));
 
         Blade.forPlatform(new BladeBukkitPlatform(this)).build().register(new TPCommand(this));
-        this.getServer().getConsoleSender().sendMessage("&7[&aTP&7] &fCommands Loaded",
-                "\n", "&7[&aTP&7] &fWelcome - &5Discord&f: stompyafk");
+        this.getServer().getConsoleSender().sendMessage(CC.translate("&7[&aTP&7] &fCommands Loaded"),
+                "\n", CC.translate("&7[&aTP&7] &fWelcome - &5Discord&f: stompyafk"));
     }
 
     /**

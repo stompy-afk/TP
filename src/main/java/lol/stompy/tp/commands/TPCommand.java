@@ -11,6 +11,7 @@ import me.vaperion.blade.annotation.command.Command;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Location;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.Optional;
@@ -30,19 +31,18 @@ public class TPCommand {
     }
 
     @Command("tp")
-    public void help(@Sender Player sender, @me.vaperion.blade.annotation.argument.Optional @Name("tp") @Text String tpName) {
+    public void help(@Sender CommandSender sender) {
+        sender.sendMessage(CC.translate("&7[&aTP&7] &fTP Commands"));
+        sender.sendMessage(CC.translate("&7-- &f/tp list &7--"));
+        sender.sendMessage(CC.translate("&7-- &f/tp to <tp> &7--"));
+        sender.sendMessage(CC.translate("&7-- &f/tp create <name>&7--"));
+        sender.sendMessage(CC.translate("&7-- &f/tp delete <tp>&7--"));
+        sender.sendMessage(CC.translate("&7-- &f/tp send <player> <tp> &7--"));
+        sender.sendMessage(CC.translate("&7-- &f/tp accept <player> &7--"));
+    }
 
-        if (tpName == null || tpName.isEmpty()) {
-            sender.sendMessage(CC.translate("&7[&aTP7&] &fTP Commands"));
-            sender.sendMessage(CC.translate("&7-- &f/tp list &7--"));
-            sender.sendMessage(CC.translate("&7-- &f/tp <tp> &7--"));
-            sender.sendMessage(CC.translate("&7-- &f/tp create <name>&7--"));
-            sender.sendMessage(CC.translate("&7-- &f/tp delete <tp>&7--"));
-            sender.sendMessage(CC.translate("&7-- &f/tp send <player> <tp> &7--"));
-            sender.sendMessage(CC.translate("&7-- &f/tp accept <player> &7--"));
-            return;
-        }
-
+    @Command("tp to")
+    public void tpTo(@Sender Player sender, @Name("tp") @Text String tpName) {
         final Optional<Profile> optionalProfile = tp.getProfileHandler().getProfile(sender.getUniqueId());
 
         if (optionalProfile.isEmpty()) {
@@ -136,6 +136,11 @@ public class TPCommand {
             return;
         }
 
+        if (sender.getUniqueId().equals(player.getUniqueId())) {
+            sender.sendMessage(CC.translate("&cYou can't use this command on yourself!"));
+            return;
+        }
+
         final Optional<Profile> optionalSenderProfile = this.tp.getProfileHandler().getProfile(sender.getUniqueId());
 
         if (optionalSenderProfile.isEmpty()) {
@@ -173,6 +178,11 @@ public class TPCommand {
 
         if (!canInviteOthers) {
             sender.sendMessage(CC.translate("&cThe admin disabled this command!"));
+            return;
+        }
+
+        if (sender.getUniqueId().equals(player.getUniqueId())) {
+            sender.sendMessage(CC.translate("&cYou can't use this command on yourself!"));
             return;
         }
 

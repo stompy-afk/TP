@@ -12,7 +12,7 @@ public class SimpleCooldown {
     private boolean notified;
 
     public SimpleCooldown(long duration) {
-        this.duration = duration;
+        this.duration = duration * 1000L;
 
         if (duration == 0) {
             this.notified = true;
@@ -33,7 +33,7 @@ public class SimpleCooldown {
     }
 
     public boolean hasExpired() {
-        return System.currentTimeMillis() - this.expire >= 0;
+        return (System.currentTimeMillis() - this.expire) >= 0;
     }
 
     public String getTimeLeft() {

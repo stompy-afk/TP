@@ -23,6 +23,8 @@ public class ProfileHandler {
     public ProfileHandler(TP tp) {
         this.tp = tp;
 
+        tp.getServer().getPluginManager().registerEvents(new ProfileListener(this), tp);
+
         this.profileHashMap = new HashMap<>();
         this.cooldownDuration = tp.getConfig().getInt("settings.cooldown");
     }

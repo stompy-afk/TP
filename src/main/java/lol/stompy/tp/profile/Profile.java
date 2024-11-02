@@ -19,7 +19,6 @@ public class Profile {
 
     private final HashMap<String, Location> warps;
     private final SimpleCooldown tpCooldown;
-    ;
 
     private final List<TPRequest> tpRequests = new ArrayList<>();
 
@@ -56,7 +55,7 @@ public class Profile {
 
         strings.forEach(s -> {
             final String[] args = s.split(":");
-            warps.put(args[0], sLocation.stringToLocation(args[1]));
+            warps.put(args[0].toUpperCase(), sLocation.stringToLocation(args[1]));
         });
 
     }
@@ -97,7 +96,7 @@ public class Profile {
      */
 
     public final boolean isOnCooldown() {
-        return this.tpCooldown.hasExpired();
+        return !this.tpCooldown.hasExpired();
     }
 
     /**
@@ -108,7 +107,7 @@ public class Profile {
      */
 
     public final void createTp(String name, Location tp) {
-        warps.put(name, tp);
+        warps.put(name.toUpperCase(), tp);
     }
 
     /**
@@ -118,7 +117,7 @@ public class Profile {
      */
 
     public final void deleteTp(String name) {
-        warps.remove(name);
+        warps.remove(name.toUpperCase());
     }
 
     /**
