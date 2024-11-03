@@ -31,11 +31,12 @@ public class TPRequest {
 
     public TPRequest(String tpName, Profile sender, Profile receiver) {
         this.tpName = tpName;
+
         this.sender = sender;
         this.receiver = receiver;
 
         this.bukkitTask = Bukkit.getServer().getScheduler().runTaskLater(TP.getInstance(), this::requestExpire,
-                TP.getInstance().getConfig().getInt("expire-events") * 20L);
+                TP.getInstance().getConfig().getInt("settings.expire-invites") * 20L);
     }
 
     /**
@@ -51,13 +52,12 @@ public class TPRequest {
 
         final Optional<Location> optionalTP = sender.getWarp(tpName);
 
-        sender.removeRequest(tpName);
-        receiver.removeRequest(tpName);
-
         if (optionalTP.isEmpty()) {
             player.sendMessage(CC.translate("&cTp no longer exists!"));
             if (playerSender != null)
                 playerSender.sendMessage(CC.translate("&c" + player.getName() + "'s teleportation failed, as your tp " + tpName + " no longer exists!"));
+
+            this.requestExpire();
             return;
         }
 
@@ -66,6 +66,8 @@ public class TPRequest {
 
         if (playerSender != null)
             playerSender.sendMessage(CC.translate("&aPlayer &f" + player.getName() + "&a was successfully teleported to &f" + tpName));
+
+        this.requestExpire();
     }
 
     /**

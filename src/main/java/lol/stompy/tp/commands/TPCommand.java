@@ -166,11 +166,8 @@ public class TPCommand {
 
         sender.sendMessage(CC.translate("&aSent tp request to " + player.getName() + " to the TP " + tpName + "!"));
 
-        final TextComponent textComponent = new TextComponent();
-        textComponent.setText(CC.translate("&aYou've received a tp request to go to the tp " + tpName + " from the player " + sender.getName() + " click on this message to accept!"));
-        textComponent.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "tp accept " + sender.getName()));
-
-        player.spigot().sendMessage(textComponent);
+        player.sendMessage(CC.translate("&aYou've received a tp request from " + sender.getName() + " to warp " + tpName));
+        player.sendMessage(CC.translate("&aType &7/tp accept " + sender.getName() + " &a to accept the request!"));
     }
 
     @Command("tp accept")

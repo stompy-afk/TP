@@ -20,7 +20,7 @@ public class Profile {
     private final HashMap<String, Location> warps;
     private final SimpleCooldown tpCooldown;
 
-    private final List<TPRequest> tpRequests = new ArrayList<>();
+    private final List<TPRequest> tpRequests;
 
     /**
      * Creates a profile for a uuid
@@ -34,6 +34,7 @@ public class Profile {
 
         this.warps = new HashMap<>();
         this.tpCooldown = new SimpleCooldown(tpCooldown);
+        this.tpRequests = new ArrayList<>();
     }
 
     /**
@@ -45,8 +46,10 @@ public class Profile {
 
     public Profile(ConfigurationSection configurationSection, int tpCooldown) {
         this.uuid = UUID.fromString(configurationSection.getName());
+
         this.tpCooldown = new SimpleCooldown(tpCooldown);
         this.warps = new HashMap<>();
+        this.tpRequests = new ArrayList<>();
 
         final List<String> strings = configurationSection.getStringList("warps");
 
@@ -57,7 +60,6 @@ public class Profile {
             final String[] args = s.split(":");
             warps.put(args[0].toUpperCase(), sLocation.stringToLocation(args[1]));
         });
-
     }
 
 
@@ -150,10 +152,7 @@ public class Profile {
      */
 
     public final void removeRequest(String tpName) {
-        tpRequests.forEach(tpRequest -> {
-            if (tpRequest.getTpName().equalsIgnoreCase(tpName))
-                tpRequests.remove(tpRequest);
-        });
+        tpRequests.removeIf(tpRequest -> tpRequest.getTpName().equalsIgnoreCase(tpName));
     }
 
     /**
