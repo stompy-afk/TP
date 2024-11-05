@@ -1,6 +1,7 @@
 package lol.stompy.tp;
 
 import lol.stompy.tp.commands.TPCommand;
+import lol.stompy.tp.profile.Profile;
 import lol.stompy.tp.profile.ProfileHandler;
 import lol.stompy.tp.util.CC;
 import lol.stompy.tp.util.sFile;
@@ -54,6 +55,8 @@ public class TP extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        profileHandler.getProfiles().forEach(profile -> profileHandler.handleRemoval(profile, false));
+        for (Profile profile : profileHandler.getProfiles())
+            if (profile != null)
+                profileHandler.handleRemoval(profile, false);
     }
 }
